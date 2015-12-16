@@ -1,0 +1,10 @@
+= unit test to show connection pool keep-alive issue
+
+This is probably a reproducer for the issue https://github.com/eclipse/vert.x/issues/1244
+
+To "confuse" the connection pool, a fake server handles one request with Connection: keep-alive and the 2nd
+with Connection: close. If the connection close is not handled correctly a 3rd request on the connection will fail.
+
+When running a few requests, not all finish, the test currently uses 15 requests (with a pool size of 5) and only 12
+finish.
+
