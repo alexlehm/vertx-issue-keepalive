@@ -88,12 +88,20 @@ public class KeepAliveTest extends VertxTestBase {
       log.info("accepted new connection");
       AtomicBoolean firstRequest = new AtomicBoolean(true);
       socket.handler(RecordParser.newDelimited("\r\n\r\n", buffer -> {
+        log.info("request "+buffer);
         if (firstRequest.getAndSet(false)) {
-          socket.write("HTTP/1.1 200 OK\n" + "Content-Type: text/plain\n" + "Content-Length: 4\n"
-              + "Connection: keep-alive\n" + "\n" + "xxx\n");
+          socket.write("HTTP/1.1 200 OK\n" 
+              + "Content-Type: text/plain\n" 
+              + "Content-Length: 4\n"
+              + "\n" 
+              + "xxx\n");
         } else {
-          socket.write("HTTP/1.1 200 OK\n" + "Content-Type: text/plain\n" + "Content-Length: 1\n"
-              + "Connection: close\n" + "\n" + "\n");
+          socket.write("HTTP/1.1 200 OK\n" 
+              + "Content-Type: text/plain\n" 
+              + "Content-Length: 1\n"
+              + "Connection: close\n" 
+              + "\n" 
+              + "\n");
           socket.close();
         }
       }));
