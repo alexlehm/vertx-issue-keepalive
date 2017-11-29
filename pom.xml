@@ -6,7 +6,7 @@
 
   <groupId>cx.lehmann.vertx</groupId>
   <artifactId>issue-keepalive</artifactId>
-  <version>3.0.0</version>
+  <version>3.5.0</version>
 
   <properties>
     <!-- the main class -->
